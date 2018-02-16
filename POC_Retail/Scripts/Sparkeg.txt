@@ -1,0 +1,31 @@
+Spark
+/*
+HighBuzzProducts
+NormalProducts
+RareProducts
+OnDemandCrawlProducts
+AvailableProducts
+OtherProducts
+*/
+
+val ProductData = sc.textFile("HighBuzzProducts")
+val newData = ProductData.map(x=>x.split(","))
+case class Prod(
+RTLID:int,
+RTLName:chararray,
+TypeOfCrawling:chararray,
+Prod_URL:chararray,
+Title:chararray,
+SalePrice:float,
+RegPrice:float,
+RebatePercent:int,
+StockInfo:chararray
+)
+val resultData = newData.map(e=>Prod(e(0).trim.toInt,e(1),e(2),e(3),e(4),e(5).trim.toFloat,e(6).trim.toFloat,e(7).trim.toInt,e(8))).toDF()
+resultData.registerTempTable("Product_Table")
+
+resultData.PrintSchema
+resultData.groupBy("TypeOfCrawling").count.show
+
+val asdasd = spark.sql("select * from Product_Table where StockInfo=='InStock'")
+asdasd.show()

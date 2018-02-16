@@ -1,0 +1,8 @@
+. /home/gopal/parameter
+sqoop export --connect jdbc:mysql://localhost/Retail_Market --table HighBuzzProduct --export-dir /${Pig_Output_path}/HBP/part-r-00000 --fields-terminated-by ',';
+sqoop export --connect jdbc:mysql://localhost/Retail_Market --table NormalProduct --export-dir /${Pig_Output_path}/NP/part-r-00000 --fields-terminated-by ',';
+sqoop export --connect jdbc:mysql://localhost/Retail_Market --table RareProduct --export-dir /${Pig_Output_path}/RP/part-r-00000 --fields-terminated-by ',';
+sqoop export --connect jdbc:mysql://localhost/Retail_Market --table OnDemandCrawlProduct --export-dir /${Pig_Output_path}/ODCP/part-r-00000 --fields-terminated-by ',';
+sqoop export --connect jdbc:mysql://localhost/Retail_Market --table AvailableProduct --export-dir /${Pig_Output_path}/AP/part-r-00000 --fields-terminated-by ',';
+sqoop export --connect jdbc:mysql://localhost/Retail_Market --table OtherProducts --export-dir /${Pig_Output_path}/OP/part-r-00000 --fields-terminated-by ',';
+

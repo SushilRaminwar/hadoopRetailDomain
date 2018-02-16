@@ -1,0 +1,39 @@
+if(crawl=="BS")
+{
+	if(salePrice<100.00 && RebatePercent>50)
+	{
+	//"High Buzz Product"
+	  mos.write("HighBuzzProduct", key, new Text(record) );
+	}
+	if(RegPric<150.00 && (RebatePercent>25 && RebatePercent<50)
+	{
+	//"Normal Product"	
+	mos.write("NormalProduct", key, new Text(record) );
+	}
+	if(length(title)>100)
+	{
+	//"Rare Product"
+	mos.write("RareProduct", key, new Text(record) );
+	}
+}
+elseif(crawl=="ODC")
+{
+	if(SalePrice<150.00)
+	{
+		if(SalePrice>100.00)
+		{
+		//"On Demand Crawl Product"
+		mos.write("OnDemandCrawlProduct", key, new Text(record) );
+		}
+	}
+	if(StockInfo=="InStock")
+	{
+	//"Available Product"
+		mos.write("AvailableProduct", key, new Text(record) );
+	}
+}
+else 
+{
+//"Other Products"
+mos.write("OtherProducts", key, new Text(record) );
+}

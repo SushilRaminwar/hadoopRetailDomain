@@ -1,0 +1,15 @@
+mysql << EOF
+use Retail_Market;
+drop table if exists HighBuzzProduct;
+drop table if exists NormalProduct;
+drop table if exists RareProduct;
+drop table if exists OnDemandCrawlProduct;
+drop table if exists AvailableProduct;
+drop table if exists OtherProducts;
+create table HighBuzzProduct(RTLID int,RTLName varchar(50),TypeOfCrawling varchar(10),Prod_URL varchar(200),Title varchar(200),SalePrice float,RegPrice float,RebatePercent int,StockInfo varchar(20));
+create table NormalProduct(RTLID int,RTLName varchar(50),TypeOfCrawling varchar(10),Prod_URL varchar(200),Title varchar(200),SalePrice float,RegPrice float,RebatePercent int,StockInfo varchar(20));
+create table RareProduct(RTLID int,RTLName varchar(50),TypeOfCrawling varchar(10),Prod_URL varchar(200),Title varchar(200),SalePrice float,RegPrice float,RebatePercent int,StockInfo varchar(20));
+create table OnDemandCrawlProduct(RTLID int,RTLName varchar(50),TypeOfCrawling varchar(10),Prod_URL varchar(200),Title varchar(200),SalePrice float,RegPrice float,RebatePercent int,StockInfo varchar(20));
+create table AvailableProduct(RTLID int,RTLName varchar(50),TypeOfCrawling varchar(10),Prod_URL varchar(200),Title varchar(200),SalePrice float,RegPrice float,RebatePercent int,StockInfo varchar(20));
+create table OtherProducts(RTLID int,RTLName varchar(50),TypeOfCrawling varchar(10),Prod_URL varchar(200),Title varchar(200),SalePrice float,RegPrice float,RebatePercent int,StockInfo varchar(20));
+EOF

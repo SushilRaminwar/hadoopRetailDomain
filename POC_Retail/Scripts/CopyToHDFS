@@ -1,0 +1,4 @@
+cp /home/sushil/Inputfile.docx .
+. /home/sushil/parameter
+hadoop fs -mkdir "/$Inputpath"
+hadoop fs -put Inputfile.docx "/$Inputpath"

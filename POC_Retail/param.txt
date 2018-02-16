@@ -1,0 +1,6 @@
+dirname="sensexpoc"
+Inputpath="sensexinput"
+RunnableJarName="poc.jar"
+DriverClassName="com/hadoop/poc/Driver"
+Outputpath="sensexoutput"
+Pig_Output_path="sensexpigop"

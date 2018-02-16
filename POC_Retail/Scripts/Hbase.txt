@@ -1,0 +1,54 @@
+1)Create HBase table Retailers 
+	with column family retailer_data
+	
+		#Enter into hbase shell
+		$hbase shell
+		hbase> create 'Retailers','retailer_data'
+		hbase> list
+		hbase>exit
+
+2)create pig script to load data into Retailers table of Hbase
+
+//Script name: Load_Hbase_Retailers.pig
+//Load dataset 'Retailers' from HDFS location
+
+raw_data = LAOD 'hdfs:/PIG_OUTPUT_PATH/HBP' using PigStorage(',') AS 
+(
+RTLID:int,
+RTLName:chararray,
+TypeOfCrawling:chararray,
+Prod_URL:chararray,
+Title:chararray,
+SalePrice:float,
+RegPrice:float,
+RebatePercent:int,
+StockInfo:chararray
+);
+
+/*To dump data from pig storage to stdout --->  dump raw_data;
+Use HBase storage handler to map data from Pig to HBase
+*/RTLID is row key
+
+STORE raw_data INTO 'hbase://Retailers' 
+			USING org.apache.pig.backend.hadoop.hbase..HBaseStorage
+			(
+			'
+			retailer_data:RTLName
+			retailer_data:TypeOfCrawling
+			retailer_data:Prod_URL
+			retailer_data:Title
+			retailer_data:SalePrice
+			retailer_data:RegPrice
+			retailer_data:RebatePercent
+			retailer_data:StockInfo
+			'
+			);
+
+ 3)Run the Pig Script (Load_Hbase_Retailers.pig)		
+
+$ PIG_CLASSPATH = /usr/lib/hbase/hbase.jar:/usr/lib/zookeeper/zookeeper-3.4.5-cdh4.4.0.jar /usr/bin/pig /home/asdasd/Load_Hbase_Retailers
+
+4)Enter HBase shell and verify the data in the 'Retailers' tabel.
+
+
+hbase> scan 'Retailers'

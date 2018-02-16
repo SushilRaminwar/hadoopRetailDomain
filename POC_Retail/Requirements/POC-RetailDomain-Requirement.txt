@@ -1,0 +1,55 @@
+POC2 - RETAIL DATA POC
+------------------------
+
+Input Format - .xls
+
+RTLID	RTLNAME	TYPEOFCRAWLING	PROD_URL	TITLE	SALEPRICE	REGPRICE	REBATEPERCENT	STOCKINFO
+
+
+12	Amazon	BS	http://www.amazon.com/dell/lp	Amazon.com:Dell Laptop	100.00	150.00	33	InStock
+
+like the above please create 3000 records on your own
+
+NOTE: TYPEOFCRAWLING can be  - BS,ODC,SEED,ISBN,SPN
+
+REQUIREMENT:
+------------
+
+  1. take the complete Excel Input data on HDFS
+  
+  2. Develope a Map Reduce Use Case to get the below filtered results
+     from the HDFS Input data(Excel data)
+
+     If TypeOfCrawling is -->'BS'
+
+          -salePrice < 100.00  & RebatePercent>50  --> store "HighBuzzProducts"
+          -RegPrice<150.00 & RebatePercent in 25-50 --> store "NormalProducts"
+          -lengthOf(title)>100 ---> 'rare products'
+          
+     If TypeOfCrawling is -->'ODC'
+    
+          - salePrice < 150.00 --> store "OnDemandCrawlProducts"
+          - StockInfo --> "InStock"  -->store "AvailableProducts"
+
+    else
+         
+          store in "OtherProducts"
+
+
+  NOTE: In the mentioned file names only 5 outputs have to be generated
+
+
+  3. Develop a PIG Script to filter the Map Reduce Output in the below fashion
+
+       - Provide the Unique data
+
+       - Sort the Unique data based on RTLID in DESC order
+
+  4. EXPORT the same PIG Output from HDFS to MySQL using SQOOP
+
+  5. Develop a Dashboard solution using either Structs or Springs framework
+
+     to see the results in a Reporting Manner (In a paginated manner)
+  
+  6. Store the same PIG Output in a HIVE External Table
+
